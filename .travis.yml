@@ -7,7 +7,7 @@ before_install:
     - docker build -t layziebone/client-test -f Dockerfile.dev
 
 script:
-    - docker run -e CI=true layziebone/client-test npm test
+    - docker run -e CI=true layzie/client-test npm run test -- --coverage
 
 after_success:
     - docker build layziebone/multi-client ./client
