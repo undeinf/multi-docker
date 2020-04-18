@@ -10,10 +10,10 @@ script:
     - docker run -e CI=true layziebone/client-test npm test -- --coverage
 
 after_success:
-    - docker build layziebone/multi-client ./client
-    - docker build layziebone/multi-nginx ./nginx
-    - docker build layziebone/multi-server ./server
-    - docker build layziebone/multi-worker ./worker
+    - docker build -t layziebone/multi-client ./client
+    - docker build -t layziebone/multi-nginx ./nginx
+    - docker build -t layziebone/multi-server ./server
+    - docker build -t layziebone/multi-worker ./worker
 #docker login to move build to docker hub
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 #push files to docker hub
