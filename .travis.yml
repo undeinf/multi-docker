@@ -28,6 +28,7 @@ deploy:
     region: "us-east-2"
     app: "multi-docker"
     env: "MultiDocker-env"
+    bucket_name: ""
     bucker_path: "multi-docker"
     on:
         branch: master
