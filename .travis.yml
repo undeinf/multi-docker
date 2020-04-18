@@ -15,7 +15,7 @@ after_success:
     - docker build layziebone/multi-server ./server
     - docker build layziebone/multi-worker ./worker
 #docker login to move build to docker hub
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin "$DOCKER_PASSWORD"
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 #push files to docker hub
     - docker push layziebone/multi-client
     - docker push layziebone/multi-nginx
