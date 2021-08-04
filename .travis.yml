@@ -1,0 +1,22 @@
+sudo: required
+service:
+  - docker
+
+before_install:
+  - docker build -t layziebone/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true layziebone/react-test npm test
+
+after_success:
+  - docker build -t layziebone/multi-client ./client
+  - docker build -t layziebone/multi-nginx ./nginx
+  - docker build -t layziebone/multi-server ./server
+  - docker build -t layziebone/multi-worker ./worker
+  # log in to docker CLI
+  - echo "$DOCKER_PWD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push to docker hub
+  - docker push layziebone/multi-client
+  - docker push layziebone/multi-nginx
+  - docker push layziebone/multi-server
+  - docker push layziebone/multi-worker
